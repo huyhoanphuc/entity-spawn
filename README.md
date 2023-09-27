@@ -18,6 +18,22 @@ local HardCore = {
     id = 1,
 }
 
+local DepthW = {
+    Title = "Finally Free",
+    Desc = "Encounter Depth",
+    Reason = "Survive Depth",
+    Image = "https://github.com/MuhXd/DoorSuff/blob/main/DoorsModes/Png.png?raw=true",
+    id = 2,
+}
+
+local Depth = {
+    Title = "The Entity Is Still Freezing",
+    Desc = "It's So Cold",
+    Reason = "Dont Survive Depth",
+    Image = "https://github.com/MuhXd/DoorSuff/blob/main/DoorsModes/Png.png?raw=true",
+    id = 3,
+}
+
 local Smiles = {
     Title = "Income The Frowners",
     Desc = "Stop Smiling",
@@ -32,6 +48,30 @@ local SmilesDie = {
     Reason = "Encounter And Dont Survive Smiler",
     Image = "https://tr.rbxcdn.com/533cbe35b1cf3d4e5d4f99278978563f/150/150/Image/Png",
     id = 5,
+}
+
+local NightmareRush ={
+    Title = "Rush From Your Nightmares",
+    Desc = "Don't Be fooled",
+    Reason = "Encounter And Survive Nightmare Rush",
+    Image = "https://tr.rbxcdn.com/533cbe35b1cf3d4e5d4f99278978563f/150/150/Image/Png",
+    id = 6,
+}
+
+local NightmareAmbush ={
+    Title = "Ambush But Even Harder",
+    Desc = "Don't Be fooled",
+    Reason = "Encounter And Survive Nightmare Ambush",
+    Image = "https://tr.rbxcdn.com/533cbe35b1cf3d4e5d4f99278978563f/150/150/Image/Png",
+    id = 7,
+}
+
+local NightmareAmbush ={
+    Title = "Ambush But Even Harder",
+    Desc = "Don't Be fooled",
+    Reason = "Encounter And Survive Nightmare Ambush",
+    Image = "https://tr.rbxcdn.com/533cbe35b1cf3d4e5d4f99278978563f/150/150/Image/Png",
+    id = 8,
 }
 
 
@@ -91,7 +131,7 @@ if not valid2 then
 end
 
 local fileName = ModName.."Save's.txt"
-local filePath = foldername.. "/".. fileName
+local filePath = foldername.. ";".. fileName
 local valid = isfile(filePath)
 
 local Achievements = loadstring(game:HttpGet("https://raw.githubusercontent.com/MuhXd/Models/main/RegularVynixu's%20Achievement%20Modifyer"))()
@@ -299,9 +339,9 @@ end)
 
 
 
-    Singleplayer = false -- Runs more Then 1 Player Code
+    Singleplayer = fals -- Runs more Then 1 Player Code
 else
-    print("Loaded in Singleplayer") -- loaded in 1 player
+    print("Loaded in print Multiplayer") -- loaded in 1 player
     repeat task.wait()
 
     until game:GetService("ReplicatedStorage").GameData.LatestRoom.Value > 0
@@ -317,12 +357,103 @@ Lowest = string.len(game:GetService("ReplicatedStorage").GameData.GameStarted.Va
 Lowest = tonumber(Lowest)
 Stop=Lowest
 RanWait2=""
-function SmilerSpawn()
+function Depth()
+    while true do task.wait()
+    pcall(function()
+        Be=true
+
+        wait(30)
+        wait(10)
+        local Creator = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors%20Entity%20Spawner/Source.lua"))()
+
+        -- Create entity
+        if  game.ReplicatedStorage.GameData.LatestRoom.Value ~= 50 then
+        game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+        else
+            Wait(20)
+            end
+        local Depth = Creator.createEntity({
+            CustomName = "Depth", -- Custom name of your entity
+            Model = "https://github.com/sponguss/storage/raw/main/depth.rbxm", -- Can be GitHub file or rbxassetid
+            Speed = 350, -- Percentage, 100 = default Rush speed
+            DelayTime = 5,
+            KillRange=100,-- Time before starting cycles (seconds)
+            HeightOffset = 1,
+            CanKill = true,
+            BreakLights = true,
+            FlickerLights = {
+                true, -- Enabled
+                1, -- Time (seconds)
+            },
+            Cycles = {
+                Min = 2,
+                Max = 2,
+                WaitTime = 2,
+            },
+            CamShake = {
+                true, -- Enabled
+                {5, 15, 0.1, 1}, -- Shake values (don't change if you don't know)
+                100, -- Shake start distance (from Entity to you)
+            },
+            Jumpscare = {
+                true, -- Enabled ('false' if you don't want jumpscare)
+                {
+                    Image1 = "https://tr.rbxcdn.com/f0f798ca806ed372984f3b70d1b1432f/420/420/Image/Png", -- Image1 url
+                    Image2 = "https://tr.rbxcdn.com/f0f798ca806ed372984f3b70d1b1432f/420/420/Image/Png", -- Image2 url
+                    Shake = true,
+                    Sound1 = {
+                        10483790459, -- SoundId
+                        { Volume = 0.5 }, -- Sound properties
+                    },
+                    Sound2 = {
+                        5263560566, -- SoundId
+                        { Volume = 0.5 }, -- Sound properties
+                    },
+                    Flashing = {
+                        true, -- Enabled
+                        Color3.fromRGB(50, 115, 108), -- Color
+                    },
+                    Tease = {
+                        false, -- Enabled ('false' if you don't want tease)
+                        Min = 1,
+                        Max = 5,
+                    },
+                },
+            },
+            CustomDialog = {"You died to who you call Depth", "Depth is faster than rush and ambush", "And he can rebound 2 Times","use what you leared from Ambush and rush tho.","I am Nerfing All Of Entitys","To not spawn in No Hiding Spots Rooms"}, -- Custom death message (can be as long as you want)
+        })
+
+-----[[  Debug -=- Advanced  ]]-----
+Depth.Debug.OnEntityDespawned = function()
+            if getgenv().death == false then
+                AchievementsGet(DepthW)
+            end
+end
+
+            Depth.Debug.OnDeath = function()
+                getgenv().death = true
+                
+                AchievementsGet(Depth)
+            end
+            
+            ------------------------
+
+            -- Run the created entity
+            Creator.runEntity(Depth)
+                            end)
+        end
+
+
+end
+
+    Stop=string.len(JobId)
+    caa=0
+    function SmilerSpawn()
         
         while true do task.wait()
             pcall(function()
                 --   print("A-60")
-                wait(5)
+                wait(40)
             
 
 
@@ -411,3 +542,376 @@ function SmilerSpawn()
                 end)
     end
 end
+
+    function VhsSansSpawn()
+        while true do wait(200)
+            pcall(function()
+                local Creator = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors%20Entity%20Spawner/Source.lua"))()
+
+                -- Create entity
+                local entity2 = Creator.createEntity({
+                    CustomName = "A-60", -- Custom name of your entity
+                    Model = "12797548771", -- Can be GitHub file or rbxassetid
+                    Speed = 2000, -- Percentage, 100 = default Rush speed
+                    DelayTime = 13, -- Time before starting cycles (seconds)
+                    HeightOffset = 0,
+                    CanKill = true,
+                    KillRange = 320,
+                    BreakLights = true,
+                    BackwardsMovement = false,
+                    FlickerLights = {
+                        true, -- Enabled/Disabled
+                        11, -- Time (seconds)
+                    },
+                    Cycles = {
+                        Min = 1,
+                        Max = 10,
+                        WaitTime = 3,
+                    },
+                    CamShake = {
+                        true, -- Enabled/Disabled
+                        {3.5, 20, 0.1, 1}, -- Shake values (don't change if you don't know)
+                        100, -- Shake start distance (from Entity to you)
+                    },
+                    Jumpscare = {
+                        true, -- Enabled/Disabled
+                        {
+                            Image1 = "rbxassetid://11826898817", -- Image1 url
+                            Image2 = "rbxassetid://11867753039", -- Image2 url
+                            Shake = true,
+                            Sound1 = {
+                                5263560566, -- SoundId
+                                { Volume = 0.5 }, -- Sound properties
+                            },
+                            Sound2 = {
+                                5263560566, -- SoundId
+                                { Volume = 0.5 }, -- Sound properties
+                            },
+                            Flashing = {
+                                true, -- Enabled/Disabled
+                                Color3.fromRGB(255, 255, 255), -- Color
+                            },
+                            Tease = {
+                                true, -- Enabled/Disabled
+                                Min = 1,
+                                Max = 1,
+                            },
+                        },
+                    },
+                    CustomDialog = {"You died to who you call A-60...", "Try your best to out-run him.", "I really don't have nothing else", "Just try your best to Hide when you can."}, -- Custom death message
+                })
+
+                ------------------------
+                Creator.runEntity(entity2)
+                -- Run the created entity
+            end)
+        end
+    end
+
+    local function ZoO()
+        repeat
+            task.wait()
+        until game.Workspace.CurrentRooms[game:GetService("ReplicatedStorage").GameData.LatestRoom.Value].Assets:FindFirstChild("Wardrobe")
+        -- tween:Create(game.Lighting.MainColorCorrection, TweenInfo.new(1), {Contrast = 0.45}):Play()
+        local ZoO = Creator.createEntity({
+            CustomName = "200", -- Custom name of your entity
+            Model = "https://github.com/Isth4t/DoorsModels/blob/main/200Moving.rbxm?raw=true", -- Can be GitHub file or rbxassetid
+            Speed = 700, -- Percentage, 100 = default Rush speed
+            DelayTime = 10, -- Time before starting cycles (seconds)
+            KillRange=20,
+            HeightOffset = 0,
+            CanKill = true,
+            BreakLights = true,
+            BackwardsMovement = true,
+            FlickerLights = {
+                true, -- Enabled
+                5, -- Time (seconds)
+            },
+            Cycles = {
+                Min = 4,
+                Max = 4,
+                WaitTime = 2,
+            },
+            CamShake = {
+                true, -- Enabled
+                {5, 15, 0.1, 1}, -- Shake values (don't change if you don't know)
+                100, -- Shake start distance (from Entity to you)
+            },
+            Jumpscare = {
+                true, -- Enabled ('false' if you don't want jumpscare)
+                {
+                    Image1 = "rbxassetid://11400868582", -- Image1 url
+                    Image2 = "rbxassetid://11400871105", -- Image2 url
+                    Shake = true,
+                    Sound1 = {
+                        530591527, -- SoundId
+                        { Volume = 0.5 }, -- Sound properties
+                    },
+                    Sound2 = {
+                        530591527, -- SoundId
+                        { Volume = 0.5 }, -- Sound properties
+                    },
+                    Flashing = {
+                        true, -- Enabled
+                        Color3.fromRGB(255, 255, 255), -- Color
+                    },
+                    Tease = {
+                        false, -- Enabled ('false' if you don't want tease)
+                        Min = 1,
+                        Max = 3,
+                    },
+                },
+            },
+            CustomDialog = {"You died to 200.", "It's very fast.", "Hide when you hear it!"}, -- Custom death message (can be as long as you want)
+        })
+        Creator.runEntity(ZoO)
+    end
+
+
+
+
+    function Baller()
+        wait(50)
+        game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()  
+        local Creator = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors%20Entity%20Spawner/Source.lua"))()
+
+        local Baller = Creator.createEntity({
+            CustomName = "Baller", -- Custom name of your entity
+            Model = 11421844649,
+            KillRange=200,
+            Speed = 200, -- Percentage, 100 = default Rush speed
+            DelayTime = 3, -- Time before starting cycles (seconds)
+            HeightOffset = 0,
+            CanKill = false,
+            BreakLights = false,
+            FlickerLights = {
+                false, -- Enabled
+                5, -- Time (seconds)
+            },
+            Cycles = {
+                Min = 12,
+                Max = 12,
+                WaitTime = 3,
+            },
+            CamShake = {
+                false, -- Enabled
+                {5, 15, 0.1, 1}, -- Shake values (don't change if you don't know)
+                1, -- Shake start distance (from Entity to you)
+            },
+            Jumpscare = {
+                false, -- Enabled ('false' if you don't want jumpscare)
+                {
+                    Image1 = "https://create.roblox.com/marketplace/asset/11151804229/baller?pageNumber=1&pagePosition=18&keyword=", -- Image1 url
+                    Image2 = "https://create.roblox.com/marketplace/asset/11151804229/baller?pageNumber=1&pagePosition=18&keyword=", -- Image2 url
+                    Shake = false,
+                    Sound1 = { 
+                        11400679305, -- SoundId
+                        { Volume = 1 }, -- Sound properties
+                    },
+                    Sound2 = {
+                        10483837590, -- SoundId
+                        { Volume = 0 }, -- Sound properties
+                    },
+                    Flashing = {
+                        false, -- Enabled
+                        Color3.fromRGB(70, 25, 0), -- Color
+                    },
+                    Tease = {
+                        false, -- Enabled ('false' if you don't want tease)
+                        Min = 1,
+                        Max = 1,
+                    },
+                },
+            },
+        })
+
+        ------------------------
+
+        -- Run the created entity
+        Creator.runEntity(Baller)
+
+    end
+
+    caa2=10
+
+    game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Died:Connect(function()
+        getgenv().death = true
+    end)
+    workspace.ChildAdded:Connect(function(inst)
+        wait(1)
+        if inst.Name == "RushMoving" then
+            BoolValue = Instance.new("BoolValue")
+            BoolValue.Name = "Nightmare"
+            BoolValue.Parent = inst
+            inst.RushNew.Attachment.ParticleEmitter.Texture = "http://www.roblox.com/asset/?id=10888024887"
+            inst.RushNew.Attachment.ParticleEmitter.Brightness = 10
+            repeat task.wait()
+
+            until not inst:FindFirstChild("RushNew")
+
+            if getgenv().death == false then
+
+
+                AchievementsGet(NightmareRush)
+
+            end
+            a =game:GetService("ReplicatedStorage").GameData.LatestRoom.Value-1
+            b=a+5
+            repeat  task.wait()
+
+            until game:GetService("ReplicatedStorage").GameData.LatestRoom.Value >= b
+    local BallerPas = coroutine.wrap(Baller)
+            BallerPas()
+
+        elseif inst.name == "AmbushMoving" then
+            BoolValue = Instance.new("BoolValue")
+            BoolValue.Name = "Nightmare"
+            BoolValue.Parent = inst
+            inst.RushNew.Attachment.ParticleEmitter.Texture = "https://create.roblox.com/marketplace/asset/10826375579/Nightmare-ambush-png-doors"
+            inst.RushNew.Attachment.ParticleEmitter.Brightness = 10
+            repeat task.wait()
+
+            until not inst:FindFirstChild("RushNew")
+
+            if getgenv().death == false then
+                AchievementsGet(NightmareAmbush)
+            end
+            a =game:GetService("ReplicatedStorage").GameData.LatestRoom.Value-1
+            b=a+2
+            repeat  task.wait()
+
+            until game:GetService("ReplicatedStorage").GameData.LatestRoom.Value >= b
+            ZoO()
+            BallerPas()
+
+        end
+    end)
+
+
+    i1=3 
+    i2=5
+    i3=2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Be=false
+    function TraumaSpawn()
+        while true do 
+        
+            wait(100)
+            local Creator = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors%20Entity%20Spawner/Source.lua"))()
+
+            -- Create entity
+            local Trauma = Creator.createEntity({
+                CustomName = "Trauma", -- Custom name of your entity
+                Model = "11546178972", -- Can be GitHub file or rbxassetid
+                Speed = 600, -- Percentage, 100 = default Rush speed
+                DelayTime = 5,
+            KillRange=80,-- Time before starting cycles (seconds)
+            HeightOffset = 1,
+            CanKill = true,
+            BreakLights = true,
+                BackwardsMovement = true,
+                FlickerLights = {
+                    true, -- Enabled/Disabled
+                    5, -- Time (seconds)
+                },
+                Cycles = {
+                    Min = 1,
+                    Max = 1,
+                    WaitTime = 2,
+                },
+                CamShake = {
+                    true, -- Enabled/Disabled
+                    {5.5, 50, 0.5, 2}, -- Shake values (don't change if you don't know)
+                    100, -- Shake start distance (from Entity to you)
+                },
+                Jumpscare = {
+                    true, -- Enabled/Disabled
+                    {
+                        Image1 = "nil", -- Image1 url
+                        Image2 = "rbxassetid://11278624160", -- Image2 url
+                        Shake = true,
+                        Sound1 = {
+                            10483790459, -- SoundId
+                            { Volume = 0 }, -- Sound properties
+                        },
+                        Sound2 = {
+                            10483837590, -- SoundId
+                            { Volume = 1000 }, -- Sound properties
+                        },
+                        Flashing = {
+                            true, -- Enabled/Disabled
+                            Color3.fromRGB(255, 255, 255), -- Color
+                        },
+                        Tease = {
+                            true, -- Enabled/Disabled
+                            Min = 1,
+                            Max = 3,
+                        },
+                    },
+                },
+                CustomDialog = {"You died to Trauma...", "Use what you've learned from Rush and Ambush!","This Mob Randomly Spawns Theres No Patten to it"}, -- Custom death message
+            })
+
+            -----[[ Advanced ]]-----
+            ------------------------
+
+            -- Run the created entity
+            Creator.runEntity(Trauma)
+        end
+    end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+pcall(function()
+local DepthPas = coroutine.wrap(Depth)
+DepthPas()
+end)
+pcall(function()
+    local TraumaPas = coroutine.wrap(TraumaSpawn)   
+    TraumaPas()
+end)
+pcall(function()
+local SmilerPas = coroutine.wrap(SmilerSpawn)
+SmilerPas()
+end)
+pcall(function()
+local VhsSansPas = coroutine.wrap(VhsSansSpawn)
+VhsSansPas()
+end)
