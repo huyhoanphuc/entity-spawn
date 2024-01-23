@@ -6,10 +6,8 @@ Achievements.Get({
     Title = "interminable rooms",
     Desc = "Rooms",
     Reason = 'V1',
-    Image = "11867753039/meme-hamster-xd",
+    Image = "https://github.com/huyhoanphuc/roomsanddoors-20-20-20-20-20-20/blob/main/t%E1%BA%A3i%20xu%E1%BB%91ng%20(6).jpeg?raw=true",
 })
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/huyhoanphuc/autorooms/main/README.md", true))()
 
 --[=[
 @class txt
